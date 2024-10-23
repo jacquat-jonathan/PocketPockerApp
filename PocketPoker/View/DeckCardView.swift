@@ -15,52 +15,54 @@ struct DeckCardView: View {
 
     var body: some View {
         ZStack(alignment: .topLeading) {
-            VStack {
-                Text(card.number.number)
-                    .font(.system(size: 16, weight: .bold))
-            }
-            .padding(.all, 15)
-            
-            switch card.color {
-            case CardColor.Hearts:
-                Image(systemName: "heart.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: size, height: size)
-                    .foregroundColor(.red)
-                    .padding(.top, -5)
-                    .padding(.leading, 2)
-
-            case CardColor.Diamonds:
-                Image(systemName: "suit.diamond.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: size, height: size)
-                    .foregroundColor(.red)
-                    .padding(.top, -5)
-                    .padding(.leading, 2)
-
-            case CardColor.Spades:
-                Image(systemName: "suit.spade.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: size, height: size)
-                    .foregroundColor(.black)
-                    .padding(.top, -5)
-                    .padding(.leading, 2)
-
-            case CardColor.Clubs:
-                Image(systemName: "suit.club.fill")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: size, height: size)
-                    .foregroundColor(.black)
-                    .padding(.top, -5)
-                    .padding(.leading, 2)
+            if card.isShown {
+                VStack {
+                    Text(card.number.number)
+                        .font(.system(size: 16, weight: .bold))
+                }
+                .padding(.all, 15)
+                
+                switch card.color {
+                case CardColor.Hearts:
+                    Image(systemName: "heart.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: size, height: size)
+                        .foregroundColor(.red)
+                        .padding(.top, -5)
+                        .padding(.leading, 2)
+                    
+                case CardColor.Diamonds:
+                    Image(systemName: "suit.diamond.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: size, height: size)
+                        .foregroundColor(.red)
+                        .padding(.top, -5)
+                        .padding(.leading, 2)
+                    
+                case CardColor.Spades:
+                    Image(systemName: "suit.spade.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: size, height: size)
+                        .foregroundColor(.black)
+                        .padding(.top, -5)
+                        .padding(.leading, 2)
+                    
+                case CardColor.Clubs:
+                    Image(systemName: "suit.club.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: size, height: size)
+                        .foregroundColor(.black)
+                        .padding(.top, -5)
+                        .padding(.leading, 2)
+                }
             }
         }
         .frame(width: 50, height: 75)
-        .background(!tableView && card.hasBeenDrawn ? .gray : .white)
+        .background((!tableView && card.hasBeenDrawn) || !card.isShown ? .gray : .white)
         .cornerRadius(5)
         .overlay(
             RoundedRectangle(cornerRadius: 5)  // Rounded border

@@ -14,44 +14,21 @@ struct MainView: View {
     let constants = Constants()
 
     var body: some View {
-        VStack {
-            CardLinePickerView(cards: viewModel.getColorTypeAllCard(color: CardColor.Clubs))
-            CardLinePickerView(cards: viewModel.getColorTypeAllCard(color: CardColor.Spades))
-            CardLinePickerView(cards: viewModel.getColorTypeAllCard(color: CardColor.Hearts))
-            CardLinePickerView(cards: viewModel.getColorTypeAllCard(color: CardColor.Diamonds))
-        }
-        
-        Spacer()
-        
-        HStack {
-            ForEach(viewModel.table) { card in
-                DeckCardView(card: card, tableView: true)
+        NavigationView {
+            TabView {
+                PokerTableView()
+                    .tabItem {
+                        Label("Play", systemImage: "playstation.logo")
+                    }
+                CardView(card: Card(color: CardColor.Spades, number: CardNumber.King), size: 12)
+                    .tabItem {
+                        Label("Deck", systemImage: "gear")
+                    }
             }
         }
         
-        Spacer()
         
-        VStack {
-            HStack {
-                ForEach(viewModel.player.cards) { card in
-                    CardView(card: card, size: 25)
-                }
-            }
-            
-            Text(viewModel.getWinningHand())
-            
-            HStack {
-                Button("Draw card") {
-                    viewModel.drawCardsForPlayer()
-                }
-                .buttonStyle(BorderedButtonStyle())
-                
-                Button("Table draw") {
-                    viewModel.drawTable()
-                }
-                .buttonStyle(BorderedProminentButtonStyle())
-            }
-        }
+        
     }
 }
 

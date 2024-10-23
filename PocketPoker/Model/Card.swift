@@ -66,4 +66,5 @@ struct Card: Identifiable {
     var color: CardColor
     var number: CardNumber
     var hasBeenDrawn: Bool = false
+    var isShown: Bool = true
 }
